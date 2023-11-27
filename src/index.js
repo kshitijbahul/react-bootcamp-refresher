@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  //StrictMode runs a check on if the code is using deprecated libraries 
   <React.StrictMode>
     <App />
   </React.StrictMode>
