@@ -8,14 +8,17 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      name: 'Rahul'
+      name: 'Rahul',
+      company: 'Google'
     }
   }
 
   // Component is a function that returns an JSX element(JS extende code) 
   //The render method already exists on the Component class, 
   // We change what we pass to the function to render
-  
+  changeName() {
+    this.setState({})
+  }
   render() {
     return (
       <div className="App">
@@ -24,8 +27,13 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-          <h2>My Name is {this.state.name}</h2>
-          <button>Change name</button>
+          <h2>My Name is {this.state.name} and I work at {this.state.company}</h2>
+          <button onClick={() => {
+            this.setState({
+              name: 'Jamey'
+            })// 
+            console.log(this.state)
+          } }>Change name</button>
           <a
             className="App-link"
             href="https://reactjs.org"
