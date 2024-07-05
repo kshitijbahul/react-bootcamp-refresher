@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
+// Component is a function that returns an JSX element(JS extende code) 
+
 function App() {
   return (
     <div className="App">
@@ -9,6 +11,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <h2>My Name is Kshitij</h2>
         <a
           className="App-link"
           href="https://reactjs.org"

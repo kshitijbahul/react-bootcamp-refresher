@@ -1,3 +1,5 @@
+// This file is used for creating a Progressive web app , 
+// setting logo's for different rendations
 {
   "short_name": "React App",
   "name": "Create React App Sample",
