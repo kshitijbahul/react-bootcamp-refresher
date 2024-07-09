@@ -33,6 +33,12 @@ class App extends Component {
   changeName() {
     this.setState({})
   }
+  onSearchChange = (event) => {
+      const searchString = event.target.value.toLowerCase()
+      this.setState(()=>{
+        return { searchString }
+      },()=> {})
+  }
   render() {
     console.log('render')
 
@@ -42,12 +48,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input className='search-box' type ='search' placeholder='Seach here' onChange={ (event)=> {
-          const searchString = event.target.value.toLowerCase()
-          this.setState(()=>{
-            return { searchString }
-          },()=> {})
-        } }/>
+        <input className='search-box' type ='search' placeholder='Seach here' onChange={ this.onSearchChange}/>
         {
           filteredMosters.map((monster) => {
           return <div key = {monster.id}>
