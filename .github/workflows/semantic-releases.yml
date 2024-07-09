@@ -1,0 +1,20 @@
+name: semantic-releases-on-commit
+run-name: ${{ github.actor }} made a commit, budiding new version for ${{ github.ref }}
+on:
+  push:
+    branches:
+      - master
+jobs:
+  tag-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Semantic release
+        uses: cycloidio/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
