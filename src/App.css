@@ -14,3 +14,10 @@ body {
   );
   text-align: center;
 }
+
+.app-title {
+  font-size: 2.5rem;
+  color: rgb(255, 255, 255);
+  margin: 20px 0;
+  font-family: "Playwrite PE", cursive;
+}
