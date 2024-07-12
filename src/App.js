@@ -1,11 +1,13 @@
-import { Component } from 'react';
+//import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import  CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component'
 
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+
+/* class App extends Component {
   // Called anytime the componnet is created
   constructor(){
     super();
@@ -56,5 +58,34 @@ class App extends Component {
       </div>
     );
   }
+} */
+
+const App = () => {
+  const [ searchString, setSearchString ] = useState('')
+  const [ monsters, setMonsters ] = useState([])
+  console.log('render')
+  useEffect(() => {
+    console.log('useEffect')
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then((users)=> setMonsters(users ))
+  }, []);
+
+  const onSearchChange = (event) => {
+    const searchFieldText = event.target.value.toLowerCase()
+    setSearchString(searchFieldText)
+  }
+  const filteredMosters = monsters.filter((monster) => {
+    return monster.name.toLowerCase().includes(searchString)
+  })
+  return (
+    <div className="App">
+      <h1 className='app-title'>List of Monsters</h1>
+      <SearchBox placeholder = 'Search Monsters' className = 'monsters' onSearchHandler = {onSearchChange}/>
+      <CardList monsters={filteredMosters}></CardList>
+    </div>
+  ); 
 }
+
+
 export default App;
