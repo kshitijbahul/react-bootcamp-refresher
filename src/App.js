@@ -63,6 +63,8 @@ import './App.css';
 const App = () => {
   const [ searchString, setSearchString ] = useState('')
   const [ monsters, setMonsters ] = useState([])
+  const [ searchField, setSearchField ] = useState('')
+
   console.log('render')
   useEffect(() => {
     console.log('useEffect')
@@ -75,12 +77,18 @@ const App = () => {
     const searchFieldText = event.target.value.toLowerCase()
     setSearchString(searchFieldText)
   }
+  const onSearchFieldChange = (event) => {
+    const searchBoxText = event.target.value.toLowerCase();
+    setSearchField(searchBoxText)
+  }
   const filteredMosters = monsters.filter((monster) => {
     return monster.name.toLowerCase().includes(searchString)
   })
+  console.log('filteredMosters',filteredMosters)
   return (
     <div className="App">
       <h1 className='app-title'>List of Monsters</h1>
+      <SearchBox placeholder = 'Search something' className = '' onSearchHandler = {onSearchFieldChange}/>
       <SearchBox placeholder = 'Search Monsters' className = 'monsters' onSearchHandler = {onSearchChange}/>
       <CardList monsters={filteredMosters}></CardList>
     </div>
