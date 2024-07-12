@@ -63,6 +63,7 @@ import './App.css';
 const App = () => {
   const [ searchString, setSearchString ] = useState('')
   const [ monsters, setMonsters ] = useState([])
+  const [ filteredMosters, setFilteredMosters ] = useState([monsters])
   const [ searchField, setSearchField ] = useState('')
 
   console.log('render')
@@ -81,9 +82,14 @@ const App = () => {
     const searchBoxText = event.target.value.toLowerCase();
     setSearchField(searchBoxText)
   }
-  const filteredMosters = monsters.filter((monster) => {
-    return monster.name.toLowerCase().includes(searchString)
-  })
+  useEffect(()=> {
+    const newFilteredMosters = monsters.filter((monster) => {
+      return monster.name.toLowerCase().includes(searchString)
+    })
+    setFilteredMosters(newFilteredMosters)
+    console.log('useEffect for filtered monsters')
+  },[monsters,searchString])
+  
   console.log('filteredMosters',filteredMosters)
   return (
     <div className="App">
