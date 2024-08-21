@@ -1,8 +1,8 @@
 //import { Component } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import  CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component'
-
+import { getData } from './utils/data.utils';
 import logo from './logo.svg';
 import './App.css';
 
@@ -59,11 +59,17 @@ import './App.css';
     );
   }
 } */
+export type Monster = {
+  id: string,
+  name: string,
+  email: string,
+}
 
 const App = () => {
-  const [ searchString, setSearchString ] = useState('')
-  const [ monsters, setMonsters ] = useState([])
-  const [ filteredMosters, setFilteredMosters ] = useState([monsters])
+  const [ searchString, setSearchString ] = useState('')// Here the type is infered 
+  const [ monsters, setMonsters ] = useState<Monster[]>([])
+  const [ filteredMosters, setFilteredMosters ] = useState<Monster[]>(monsters)
+  
   
 
   console.log('render')
@@ -72,9 +78,15 @@ const App = () => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then((users)=> setMonsters(users ))
+
+    const fetchUsers = async () => {
+      const users = await getData<Monster[]>('https://jsonplaceholder.typicode.com/users')
+      setMonsters(users);
+    }
+    fetchUsers()
   }, []);
 
-  const onSearchChange = (event) => {
+  const onSearchChange = (event:ChangeEvent<HTMLInputElement>):void => {
     const searchFieldText = event.target.value.toLowerCase()
     setSearchString(searchFieldText)
   }
